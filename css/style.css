@@ -1,0 +1,708 @@
+:root {
+  --blue: #0d63ba;
+  --cyan: #53c1f0;
+  --ink: #000;
+  --muted: #99a7bb;
+  --line: #d5dae2;
+  --page: #f6f7f9;
+  --bezel: #1e1e1e;
+  --hex: #317ac4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Lato, "Helvetica Neue", sans-serif;
+  color: var(--ink);
+  background: var(--page);
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+#app {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.alert {
+  margin: 2rem auto;
+  max-width: 36rem;
+  padding: 1rem 1.2rem;
+  background: #fff6f6;
+  color: #8b1424;
+}
+
+/* Decorative hexagons */
+.bg-hex {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hex {
+  position: absolute;
+}
+
+.hex--tl {
+  top: -56px;
+  left: -22px;
+  width: 236px;
+}
+
+.hex--tr {
+  top: 52%;
+  right: -8px;
+  width: 72px;
+}
+
+.hex--br {
+  top: 58%;
+  right: -80px;
+  width: 240px;
+}
+
+.hex--bl {
+  bottom: 80px;
+  left: -48px;
+  width: 180px;
+}
+
+/* Header */
+.head {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 68px;
+  padding: 0 52px 0 24px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  background: var(--page);
+}
+
+.head-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copy-link {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  transform: translateY(-50%);
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 3;
+}
+
+.copy-link img,
+.copy-link svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.copy-link:hover {
+  background: #eef4fa;
+}
+
+.copy-link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Main */
+.wrap {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 3.5rem 0 2.5rem;
+}
+
+.app {
+  display: grid;
+  justify-items: center;
+  grid-template-areas:
+    "head"
+    "dls"
+    "stage"
+    "meta"
+    "feats"
+    "guide";
+  padding: 1.15rem 1.3rem 2.4rem;
+}
+
+.app + .app {
+  margin-top: 1.75rem;
+}
+
+.app-head {
+  grid-area: head;
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.app-head h2 {
+  margin-top: 21px;
+  color: var(--blue);
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.tagline {
+  margin-top: 14px;
+  max-width: 324px;
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 400;
+}
+
+.dls {
+  grid-area: dls;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  width: min(328px, 100%);
+  margin-top: 24px;
+}
+
+.dl img {
+  width: 130px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.dl--apk {
+  width: 130px;
+  height: 42px;
+  background: #232f49;
+  color: #fff;
+  border: 1px solid #cad4d3;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px 0 8px;
+  text-decoration: none;
+}
+
+.dl--apk img {
+  width: 24px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.dl--apk span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.dl--apk small {
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.dl--apk strong {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+/* Phone template */
+.stage {
+  grid-area: stage;
+  position: relative;
+  width: 100%;
+  margin-top: 34px;
+}
+
+.stage-glow {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 0;
+  width: 448px;
+  height: 285px;
+  max-width: none;
+  transform: translateX(-50%);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.scene {
+  position: relative;
+}
+
+.callouts {
+  display: none;
+}
+
+.phones-col {
+  position: relative;
+  z-index: 2;
+  justify-self: center;
+  align-self: start;
+}
+
+.phones {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  height: 202px;
+  width: min(328px, 100%);
+  overflow: hidden;
+}
+
+.phone {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  flex-shrink: 0;
+  width: 144px;
+  height: 312px;
+  border: 7px solid var(--bezel);
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--bezel);
+}
+
+.phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.phones--1 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 157px;
+  height: 202px;
+}
+
+.phones--1 .phone {
+  margin-top: 0;
+}
+
+.phones--2 .phone:first-child {
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  z-index: 2;
+}
+
+.phones--2 .phone:last-child {
+  position: absolute;
+  left: 177px;
+  top: 44px;
+  z-index: 1;
+}
+
+.meta {
+  grid-area: meta;
+  position: relative;
+  z-index: 2;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+
+.feats {
+  grid-area: feats;
+  list-style: none;
+  width: min(328px, 100%);
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.feats li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.feats img {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+.guide {
+  grid-area: guide;
+  position: relative;
+  z-index: 2;
+  margin-top: 26px;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.guide:hover {
+  color: var(--blue);
+}
+
+/* Footer */
+.foot {
+  position: relative;
+  z-index: 1;
+  background: var(--blue);
+  min-height: 245px;
+  padding: 43px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.foot-qr {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: min(330px, 100%);
+}
+
+.foot-qr img {
+  width: 101px;
+  height: 101px;
+  background: #fff;
+  padding: 6px;
+  flex-shrink: 0;
+}
+
+.foot-qr p {
+  color: #fff;
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.2;
+  max-width: 11.2rem;
+}
+
+.foot small {
+  margin-top: 52px;
+  color: var(--cyan);
+  font-size: 14px;
+  text-align: center;
+}
+
+.toast {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  background: var(--blue);
+  color: #fff;
+  padding: 0.55rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 20px rgba(4, 32, 66, 0.25);
+}
+
+/* Desktop / wide screens only. Tablet uses the mobile layout. */
+@media (min-width: 1200px) {
+  .head {
+    padding: 0 40px;
+  }
+
+  .copy-link {
+    right: 28px;
+  }
+
+  .head-title {
+    font-size: 24px;
+  }
+
+  .hex--tl {
+    top: -156px;
+    left: -94px;
+    width: 479px;
+  }
+
+  .hex--tr {
+    top: 1073px;
+    right: -20px;
+    width: 120px;
+  }
+
+  .hex--br {
+    top: 1250px;
+    right: -192px;
+    width: 411px;
+  }
+
+  .hex--bl {
+    bottom: -40px;
+    left: -48px;
+    width: 278px;
+  }
+
+  .wrap {
+    padding: 7.25rem 0 0;
+  }
+
+  .app {
+    grid-template-areas:
+      "head"
+      "stage"
+      "meta"
+      "dls"
+      "guide";
+    padding: 1.15rem 2.5rem 3.4rem;
+  }
+
+  .app + .app {
+    margin-top: 3.5rem;
+  }
+
+  .app-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 14px;
+  }
+
+  .app-head h2 {
+    margin-top: 16px;
+    font-size: 34px;
+  }
+
+  .tagline {
+    margin-top: 16px;
+    max-width: 420px;
+    font-size: 18px;
+  }
+
+  .dls {
+    width: auto;
+    margin-top: 16px;
+  }
+
+  .stage {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+    max-width: 1100px;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .scene {
+    position: relative;
+    flex-shrink: 0;
+    overflow: visible;
+    width: var(--scene-w);
+    height: var(--scene-h);
+    left: var(--scene-shift, 0);
+  }
+
+  .stage-glow {
+    width: 710px;
+    height: 452px;
+    left: var(--glow-l);
+    bottom: 0;
+    top: auto;
+    z-index: 0;
+    transform: none;
+  }
+
+  .callouts {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    width: max-content;
+  }
+
+  .callouts--l {
+    top: var(--call-l-t);
+    left: var(--call-l-x);
+  }
+
+  .callouts--r {
+    top: var(--call-r-t);
+    left: var(--call-r-x);
+  }
+
+  .callouts--r-bottom-only {
+    top: var(--call-r-b-t);
+  }
+
+  .callout--right-top {
+    width: 280px;
+    margin-left: var(--call-r-indent);
+    padding: 24px 20px 24px 30px;
+  }
+
+  .callout--right-bottom {
+    text-align: right;
+  }
+
+  .callout {
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px 30px;
+    box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .phones-col {
+    position: absolute;
+    z-index: 2;
+    left: var(--crop-l);
+    top: 0;
+    width: var(--crop-w);
+    height: var(--crop-h);
+  }
+
+  .phones {
+    z-index: 1;
+    width: var(--crop-w);
+    height: var(--crop-h);
+  }
+
+  .phone {
+    width: var(--phone-w);
+    height: var(--phone-h);
+    border-width: var(--phone-border);
+    border-radius: var(--phone-radius);
+  }
+
+  /* Two screenshots */
+  .stage--2 {
+    --scene-w: 1041px;
+    --scene-h: 281px;
+    --scene-shift: 0px;
+    --crop-l: 291px;
+    --crop-w: 458px;
+    --crop-h: 281px;
+    --glow-l: 165px;
+    --call-l-t: 63px;
+    --call-l-x: 16px;
+    --call-r-t: 51px;
+    --call-r-b-t: 179px;
+    --call-r-x: 696px;
+    --call-r-indent: 65px;
+    --phone-w: 200px;
+    --phone-h: 436px;
+    --phone-border: 10px;
+    --phone-radius: 36px;
+  }
+
+  .stage--2 .phones--2 .phone:first-child {
+    left: 10px;
+    top: 11px;
+  }
+
+  .stage--2 .phones--2 .phone:last-child {
+    left: 248px;
+    top: 61px;
+  }
+
+  /* One screenshot */
+  .stage--1 {
+    --scene-w: 792px;
+    --scene-h: 293px;
+    --scene-shift: 26px;
+    --crop-l: 264px;
+    --crop-w: 213px;
+    --crop-h: 293px;
+    --glow-l: 16px;
+    --call-l-t: 75px;
+    --call-l-x: -16px;
+    --call-r-t: 63px;
+    --call-r-b-t: 191px;
+    --call-r-x: 427px;
+    --call-r-indent: 85px;
+    --phone-w: 195px;
+    --phone-h: 424px;
+    --phone-border: 9px;
+    --phone-radius: 33px;
+  }
+
+  .meta {
+    margin-top: 22px;
+    font-size: 14px;
+  }
+
+  .feats {
+    display: none;
+  }
+
+  .guide {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+
+  .foot-qr {
+    width: auto;
+    transform: translateX(-8px);
+  }
+
+  .foot small {
+    margin-top: 36px;
+  }
+}

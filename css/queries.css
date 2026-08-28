@@ -1,0 +1,63 @@
+@media (max-width: 800px) {
+  .card-area {
+    width: 345px;
+  }
+  .note-card {
+    gap: 0.5rem;
+  }
+  .app-container > div {
+    width: 100%;
+  }
+  .app-container {
+    flex-direction: column;
+  }
+  .app-container--1 .app-img {
+    position: relative;
+    margin-bottom: 0;
+    display: flex;
+    justify-content: center;
+    right: auto;
+    top: 2rem;
+  }
+  .app-container--1 {
+    margin-bottom: 2rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+    padding-bottom: 0;
+    margin-bottom: 4.5rem;
+  }
+  .app-container--2 {
+    flex-direction: column-reverse;
+    border-radius: 0.5rem;
+    padding-bottom: 0;
+    margin-bottom: 2.5rem;
+  }
+  .app-container--2 .mt-5 {
+    margin-top: 1rem !important;
+  }
+  .app-container--2 .app-img {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    left: auto;
+    top: 2rem;
+  }
+  .app-container--1 .app-img::after,
+  .app-container--2 .app-img::after {
+    width: 20rem;
+    transform: translateX(-50%);
+  }
+
+  .rwd-even-1 {
+    order: 1;
+  }
+  .rwd-even-2 {
+    order: 0;
+  }
+  .img-phones {
+    display: none;
+  }
+  .footer-copyright {
+    font-size: 0.8rem;
+    width: 300px;
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "clientName": "zoe",
+  "apps": [
+    {
+      "name": "FitPulse",
+      "version": "v3.1.5",
+      "requirement": "watchOS 8.0+ / Wear OS 3.0+",
+      "features": {
+        "left": "Workout Mode Switcher",
+        "rightTop": "Real-time Heart Rate & SpO2",
+        "rightBottom": "Weekly Goal Tracker"
+      },
+      "icon": "img/apps/icon-InfoMDT.png",
+      "screenshots": [
+        "img/ui/screenshot-template.png"
+      ],
+      "ios": "https://apps.apple.com/example"
+    },
+    {
+      "name": "PixelCraft",
+      "version": "v0.9.4-beta",
+      "requirement": "iOS 15.0+ / iPadOS 15.0+",
+      "features": {
+        "left": "Toolbox & Layer Panel",
+        "rightTop": "AI Image Generation & Retouching",
+        "rightBottom": "Layer Properties & Color Palette"
+      },
+      "icon": "img/apps/icon-InfoMDT.png",
+      "screenshots": [
+        "img/ui/screenshot-template.png"
+      ],
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.fitpulse.health",
+      "userGuide": "https://fitpulse.io/help/user-guide"
+    },
+    {
+      "name": "EchoChat",
+      "version": "v4.0.2",
+      "requirement": "Cross-platform",
+      "features": {
+        "left": "Chatrooms & Friends List",
+        "rightTop": "Video Call & Screen Share",
+        "rightBottom": "File Transfer & Cloud Storage"
+      },
+      "icon": "img/apps/icon-InfoMDT.png",
+      "screenshots": [
+        "img/ui/screenshot-template.png"
+      ],
+      "android": "https://example.com/downloads/pixelcraft-beta.apk"
+    }
+  ]
+}

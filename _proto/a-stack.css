@@ -1,0 +1,144 @@
+/* 方向 A：垂直卡片流（交錯左右）
+   延續現有設計的精神，但用 nth-child 讓數量不受限。
+   任意數量都能自動交錯；1 個也成立。 */
+
+:root {
+  --blue: #0d63ba;
+  --blue-dark: #0a4c8f;
+  --cyan: #53c1f0;
+  --ink: #1c2b3a;
+  --muted: #5b6b7c;
+  --paper: #fff;
+  --wash: #f5f7fa;
+  --line: #e3e9f0;
+  --radius: 14px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Lato, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--blue) url(../img/bg.jpg) center / cover no-repeat fixed;
+  min-height: 100vh;
+}
+
+.problems {
+  max-width: 60rem; margin: 1rem auto; padding: 1rem 1.25rem;
+  background: #fff3f3; border-left: 4px solid #d7263d;
+  border-radius: 8px; color: #8b1424; font-size: .9rem;
+}
+.problems ul { margin: .4rem 0 0 1.1rem; }
+
+/* Header */
+.site-head {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.25rem 2rem; max-width: 72rem; margin: 0 auto;
+}
+.brand { height: 30px; }
+.client { color: var(--cyan); font-size: 1.15rem; }
+
+/* Apps */
+.apps { max-width: 60rem; margin: 0 auto 3rem; padding: 0 1.25rem; }
+
+.req {
+  text-align: center; color: var(--blue); background: var(--wash);
+  padding: .6rem 1rem; border-radius: var(--radius) var(--radius) 0 0;
+  font-size: .85rem; letter-spacing: .02em;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2.5rem;
+  align-items: center;
+  background: var(--paper);
+  padding: 2rem 2.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.app:last-child {
+  border-bottom: 0;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+/* 交錯：奇數圖在右、偶數圖在左。任意數量都成立 */
+.app:nth-child(odd)  .app-shot { order: 2; }
+.app:nth-child(odd)  .app-main { order: 1; }
+.app:nth-child(even) { grid-template-columns: 300px 1fr; }
+.app:nth-child(even) .app-shot { order: 1; }
+.app:nth-child(even) .app-main { order: 2; }
+
+.app-shot { display: flex; justify-content: center; }
+.app-shot img {
+  width: 100%; max-width: 290px; display: block;
+  border-bottom: 3px solid var(--cyan);
+}
+
+/* App head */
+.app-head { display: flex; align-items: center; gap: .9rem; margin-bottom: 1rem; }
+.app-icon { width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0; }
+.app-head h2 { font-size: 1.3rem; line-height: 1.2; }
+.app-head p { color: var(--muted); font-size: .9rem; margin-top: .15rem; }
+
+.app-features {
+  list-style-image: url(../img/li_img.png);
+  padding-left: 1.35rem; margin-bottom: 1.25rem;
+  color: var(--blue); text-transform: uppercase;
+  font-size: .9rem; line-height: 1.75;
+}
+
+/* Buttons：用 flex-wrap，缺按鈕不會開天窗 */
+.app-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.store { display: inline-flex; }
+.store img { height: 40px; display: block; }
+
+.store--apk {
+  height: 40px; box-sizing: border-box;
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: #232f49; color: #fff; border: 1px solid #cad4d3;
+  border-radius: 5px; padding: 0 .7rem 0 .35rem;
+}
+.store--apk img { height: 30px; }
+.store--apk span { display: flex; flex-direction: column; line-height: 1; }
+.store--apk small { font-size: .55rem; letter-spacing: .09em; }
+.store--apk strong { font-size: 1.05rem; font-weight: 700; }
+
+.guide {
+  display: inline-flex; align-items: center; justify-content: space-between;
+  gap: .5rem; margin-top: 1rem; padding: .45rem .8rem;
+  min-width: 260px; background: var(--wash); color: var(--blue);
+  border-radius: 6px; font-weight: 700; font-size: .9rem;
+}
+.guide:hover { background: #e8eef6; }
+
+/* Footer */
+.site-foot {
+  max-width: 60rem; margin: 0 auto; padding: 0 1.25rem 2.5rem;
+  color: #fff; text-align: center;
+}
+.qr {
+  display: inline-flex; align-items: center; gap: 1.25rem;
+  text-align: left; margin-bottom: 1rem;
+}
+.qr img { height: 78px; }
+.qr p { color: #89f7fe; font-style: italic; font-size: .95rem; max-width: 190px; }
+.site-foot small { display: block; opacity: .55; font-size: .8rem; }
+
+/* ---- 手機 ---- */
+@media (max-width: 780px) {
+  .site-head { padding: 1rem 1.25rem; }
+  .apps { padding: 0 1rem; }
+
+  /* 一律改為單欄、文字在上圖在下，交錯規則自動失效 */
+  .app,
+  .app:nth-child(even) { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem 1.25rem; }
+  .app:nth-child(odd)  .app-shot,
+  .app:nth-child(even) .app-shot { order: 2; }
+  .app:nth-child(odd)  .app-main,
+  .app:nth-child(even) .app-main { order: 1; }
+
+  .app-actions { gap: .5rem; }
+  .guide { min-width: 0; width: 100%; }
+  .qr { flex-direction: column; text-align: center; gap: .6rem; }
+  .qr p { max-width: none; }
+}

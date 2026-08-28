@@ -1,0 +1,128 @@
+/* 方向 C：清單式（App Store 風格）
+   資訊密度最高，掃視最快。手機圖縮小成側邊縮圖。
+   數量再多都不會變長篇；適合當「下載入口」而非「介紹頁」。 */
+
+:root {
+  --blue: #0d63ba;
+  --cyan: #53c1f0;
+  --ink: #101d29;
+  --muted: #6b7a89;
+  --wash: #f7f9fc;
+  --line: #eceff4;
+  --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Lato, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--blue) url(../img/bg.jpg) center / cover no-repeat fixed;
+  min-height: 100vh;
+}
+
+.problems {
+  max-width: 52rem; margin: 1rem auto; padding: 1rem 1.25rem;
+  background: #fff3f3; border-left: 4px solid #d7263d;
+  border-radius: 8px; color: #8b1424; font-size: .9rem;
+}
+.problems ul { margin: .4rem 0 0 1.1rem; }
+
+.site-head {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.5rem 2rem; max-width: 52rem; margin: 0 auto;
+}
+.brand { height: 30px; }
+.client { color: var(--cyan); font-size: 1.15rem; }
+
+.apps {
+  max-width: 52rem; margin: 0 auto 3rem; padding: 0 1.25rem;
+}
+
+.req {
+  text-align: center; color: var(--blue); background: var(--wash);
+  padding: .7rem 1rem; border-radius: var(--radius) var(--radius) 0 0;
+  font-size: .85rem; border-bottom: 1px solid var(--line);
+}
+
+/* 每個 APP 是一列 */
+.app {
+  display: grid;
+  grid-template-columns: 118px 1fr;
+  gap: 1.5rem;
+  background: #fff;
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.app:last-child { border-bottom: 0; border-radius: 0 0 var(--radius) var(--radius); }
+
+/* 縮圖：小尺寸手機畫面 */
+.app-shot {
+  border-radius: 10px; overflow: hidden;
+  background: var(--wash); border: 1px solid var(--line);
+  height: 150px; display: flex; justify-content: center;
+}
+.app-shot img { width: 108px; margin-top: .6rem; display: block; }
+
+.app-head { display: flex; align-items: center; gap: .75rem; margin-bottom: .7rem; }
+.app-icon { width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0; }
+.app-head h2 { font-size: 1.15rem; line-height: 1.2; }
+.app-head p { color: var(--muted); font-size: .85rem; margin-top: .1rem; }
+
+/* 功能改成 inline tag，不論 1 條或 5 條高度都穩定 */
+.app-features {
+  list-style: none; padding: 0; margin-bottom: .9rem;
+  display: flex; flex-wrap: wrap; gap: .35rem;
+}
+.app-features li {
+  font-size: .72rem; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--blue); background: #eaf3fc;
+  padding: .2rem .55rem; border-radius: 999px;
+}
+
+.app-actions { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.store { display: inline-flex; }
+.store img { height: 36px; display: block; }
+
+.store--apk {
+  height: 36px; box-sizing: border-box;
+  display: inline-flex; align-items: center; gap: .3rem;
+  background: #232f49; color: #fff; border: 1px solid #cad4d3;
+  border-radius: 5px; padding: 0 .6rem 0 .28rem;
+}
+.store--apk img { height: 26px; }
+.store--apk span { display: flex; flex-direction: column; line-height: 1; }
+.store--apk small { font-size: .5rem; letter-spacing: .08em; }
+.store--apk strong { font-size: .95rem; font-weight: 700; }
+
+/* 說明書變成同一行的文字連結，不佔整條 */
+.guide {
+  display: inline-flex; align-items: center; gap: .2rem;
+  color: var(--blue); font-weight: 700; font-size: .85rem;
+  margin-left: .25rem;
+}
+.guide .material-symbols-outlined { font-size: 1.1rem; }
+.guide:hover { color: var(--cyan); }
+
+.site-foot {
+  max-width: 52rem; margin: 0 auto; padding: 0 1.25rem 2.5rem;
+  color: #fff; text-align: center;
+}
+.qr { display: inline-flex; align-items: center; gap: 1.25rem; text-align: left; margin-bottom: 1rem; }
+.qr img { height: 78px; }
+.qr p { color: #89f7fe; font-style: italic; font-size: .95rem; max-width: 190px; }
+.site-foot small { display: block; opacity: .55; font-size: .8rem; }
+
+@media (max-width: 780px) {
+  .site-head { padding: 1rem 1.25rem; }
+  .apps { padding: 0 1rem; }
+  .app { grid-template-columns: 84px 1fr; gap: 1rem; padding: 1.25rem 1rem; }
+  .app-shot { height: 110px; }
+  .app-shot img { width: 76px; margin-top: .4rem; }
+  .app-head { gap: .5rem; }
+  .app-icon { width: 38px; height: 38px; }
+  .app-head h2 { font-size: 1.05rem; }
+  .qr { flex-direction: column; text-align: center; gap: .6rem; }
+  .qr p { max-width: none; }
+}

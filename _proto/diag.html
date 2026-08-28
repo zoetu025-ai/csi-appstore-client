@@ -1,0 +1,17 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="v2.css"></head><body><div id="app"></div>
+<script src="v2-data.js"></script><script src="v2-render.js"></script>
+<script>
+setTimeout(function(){
+  var out=[], de=document.documentElement;
+  out.push('doc scrollWidth='+de.scrollWidth+' clientWidth='+de.clientWidth);
+  document.querySelectorAll('*').forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if (r.right > de.clientWidth+1) {
+      out.push('OVERFLOW '+el.tagName+'.'+(el.className||'-')+' right='+Math.round(r.right)+' w='+Math.round(r.width));
+    }
+  });
+  var pre=document.createElement('pre'); pre.id='diag';
+  pre.textContent=out.join('\n'); document.body.appendChild(pre);
+},600);
+</script></body></html>

@@ -1,0 +1,131 @@
+/* 方向 B：卡片網格
+   每個 APP 是一張獨立卡片，自動填滿列。
+   APP 數量多的時候最省空間；1 個 APP 會自動變單張大卡。 */
+
+:root {
+  --blue: #0d63ba;
+  --cyan: #53c1f0;
+  --ink: #16232f;
+  --muted: #64748b;
+  --wash: #f5f7fa;
+  --line: #e6ecf3;
+  --radius: 16px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Lato, system-ui, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(180deg, #0d63ba 0%, #0a4c8f 55%, #083f78 100%);
+  min-height: 100vh;
+}
+
+.problems {
+  max-width: 72rem; margin: 1rem auto; padding: 1rem 1.25rem;
+  background: #fff3f3; border-left: 4px solid #d7263d;
+  border-radius: 8px; color: #8b1424; font-size: .9rem;
+}
+.problems ul { margin: .4rem 0 0 1.1rem; }
+
+.site-head {
+  display: flex; align-items: center; gap: 1rem;
+  padding: 1.5rem 2rem; max-width: 78rem; margin: 0 auto;
+}
+.brand { height: 30px; }
+.client { color: var(--cyan); font-size: 1.15rem; }
+
+.apps {
+  max-width: 78rem; margin: 0 auto 3rem; padding: 0 1.5rem;
+  display: grid; gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+}
+
+.req {
+  grid-column: 1 / -1;
+  text-align: center; color: #cbe8fb;
+  font-size: .85rem; padding: .25rem 0 .5rem;
+}
+
+/* 卡片 */
+.app {
+  background: #fff; border-radius: var(--radius);
+  padding: 1.5rem; display: flex; flex-direction: column;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .12);
+}
+
+/* 只有一個 APP 時，攤平成橫向大卡，不要孤零零一張窄卡 */
+.apps[data-count="1"] { grid-template-columns: 1fr; }
+.apps[data-count="1"] .app { flex-direction: row-reverse; gap: 2.5rem; align-items: center; }
+.apps[data-count="1"] .app-main { flex: 1; }
+.apps[data-count="1"] .app-shot { width: 300px; flex-shrink: 0; }
+
+.app-head { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+.app-icon { width: 50px; height: 50px; border-radius: 11px; flex-shrink: 0; }
+.app-head h2 { font-size: 1.2rem; line-height: 1.2; }
+.app-head p { color: var(--muted); font-size: .85rem; margin-top: .15rem; }
+
+.app-features {
+  list-style-image: url(../img/li_img.png);
+  padding-left: 1.3rem; margin-bottom: 1.1rem;
+  color: var(--blue); text-transform: uppercase;
+  font-size: .85rem; line-height: 1.7;
+}
+
+/* 圖：卡片模式下只露出上半截手機，維持卡片高度一致 */
+.app-shot {
+  order: 99; margin: 1.25rem -1.5rem -1.5rem;
+  height: 190px; overflow: hidden;
+  display: flex; justify-content: center;
+  background: var(--wash);
+  border-radius: 0 0 var(--radius) var(--radius);
+  border-top: 3px solid var(--cyan);
+}
+.app-shot img { width: 250px; margin-top: 1.25rem; display: block; }
+
+.apps[data-count="1"] .app-shot {
+  order: 0; margin: 0; height: auto; background: none;
+  border: 0; border-bottom: 3px solid var(--cyan); border-radius: 0;
+}
+.apps[data-count="1"] .app-shot img { width: 300px; margin-top: 0; }
+
+.app-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: auto; }
+.store { display: inline-flex; }
+.store img { height: 38px; display: block; }
+
+.store--apk {
+  height: 38px; box-sizing: border-box;
+  display: inline-flex; align-items: center; gap: .35rem;
+  background: #232f49; color: #fff; border: 1px solid #cad4d3;
+  border-radius: 5px; padding: 0 .65rem 0 .3rem;
+}
+.store--apk img { height: 28px; }
+.store--apk span { display: flex; flex-direction: column; line-height: 1; }
+.store--apk small { font-size: .52rem; letter-spacing: .08em; }
+.store--apk strong { font-size: 1rem; font-weight: 700; }
+
+.guide {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: .5rem; margin-top: .7rem; padding: .45rem .8rem;
+  background: var(--wash); color: var(--blue);
+  border-radius: 6px; font-weight: 700; font-size: .85rem;
+}
+.guide:hover { background: #e8eef6; }
+
+.site-foot {
+  max-width: 78rem; margin: 0 auto; padding: 0 1.5rem 2.5rem;
+  color: #fff; text-align: center;
+}
+.qr { display: inline-flex; align-items: center; gap: 1.25rem; text-align: left; margin-bottom: 1rem; }
+.qr img { height: 78px; }
+.qr p { color: #89f7fe; font-style: italic; font-size: .95rem; max-width: 190px; }
+.site-foot small { display: block; opacity: .55; font-size: .8rem; }
+
+@media (max-width: 780px) {
+  .site-head { padding: 1rem 1.25rem; }
+  .apps { padding: 0 1rem; grid-template-columns: 1fr; }
+  .apps[data-count="1"] .app { flex-direction: column; gap: 0; align-items: stretch; }
+  .apps[data-count="1"] .app-shot { order: 99; width: auto; }
+  .qr { flex-direction: column; text-align: center; gap: .6rem; }
+  .qr p { max-width: none; }
+}
