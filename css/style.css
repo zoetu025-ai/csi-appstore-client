@@ -21,10 +21,18 @@ body {
   width: 100%;
 }
 
+html {
+  background-color: var(--page);
+  background-image: url("../img/ui/bg-tile.svg");
+  background-repeat: repeat-y;
+  background-position: top calc(-104.2 / 1440 * 100vw);
+  background-size: 100% auto;
+}
+
 body {
   font-family: Lato, "Helvetica Neue", sans-serif;
   color: var(--ink);
-  background: var(--page);
+  background: transparent;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -45,6 +53,7 @@ img {
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 68px;
 }
 
 .alert {
@@ -55,58 +64,24 @@ img {
   color: #8b1424;
 }
 
-/* Decorative hexagons */
-.bg-hex {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.hex {
-  position: absolute;
-}
-
-.hex--tl {
-  top: -56px;
-  left: -22px;
-  width: 236px;
-}
-
-.hex--tr {
-  top: 52%;
-  right: -8px;
-  width: 72px;
-}
-
-.hex--br {
-  top: 58%;
-  right: -80px;
-  width: 240px;
-}
-
-.hex--bl {
-  bottom: 80px;
-  left: -48px;
-  width: 180px;
-}
-
 /* Header */
 .head {
-  position: relative;
-  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
   width: 100%;
   height: 68px;
-  padding: 0 52px 0 24px;
+  padding: 0 40px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(13, 99, 186, 0.12);
   background: var(--page);
+  box-shadow: 0 4px 18px rgba(13, 99, 186, 0.12);
 }
 
 .head-title {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
   line-height: 1.2;
   min-width: 0;
@@ -118,7 +93,7 @@ img {
 .copy-link {
   position: absolute;
   top: 50%;
-  right: 12px;
+  right: 28px;
   width: 40px;
   height: 40px;
   transform: translateY(-50%);
@@ -227,48 +202,14 @@ img {
   object-fit: contain;
 }
 
-.dl--apk {
-  width: 130px;
-  height: 42px;
-  background: #232f49;
-  color: #fff;
-  border: 1px solid #cad4d3;
-  border-radius: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 10px 0 8px;
-  text-decoration: none;
-}
-
-.dl--apk img {
-  width: 24px;
-  height: 14px;
-  object-fit: contain;
-}
-
-.dl--apk span {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-
-.dl--apk small {
-  font-size: 8px;
-  font-weight: 700;
-}
-
-.dl--apk strong {
-  font-size: 19px;
-  font-weight: 700;
-}
-
 /* Phone template */
 .stage {
   grid-area: stage;
   position: relative;
-  width: 100%;
+  width: min(328px, 100%);
   margin-top: 34px;
+  display: flex;
+  justify-content: center;
 }
 
 .stage-glow {
@@ -276,16 +217,22 @@ img {
   left: 50%;
   bottom: 0;
   z-index: 0;
-  width: 448px;
-  height: 285px;
+  width: 520px;
+  height: 340px;
   max-width: none;
   transform: translateX(-50%);
   pointer-events: none;
-  mix-blend-mode: multiply;
+  background: radial-gradient(
+    ellipse 58% 62% at 50% 78%,
+    rgba(13, 99, 186, 0.28) 0%,
+    rgba(13, 99, 186, 0.12) 36%,
+    rgba(13, 99, 186, 0) 70%
+  );
 }
 
 .scene {
   position: relative;
+  width: 100%;
 }
 
 .callouts {
@@ -295,16 +242,14 @@ img {
 .phones-col {
   position: relative;
   z-index: 2;
-  justify-self: center;
-  align-self: start;
+  width: 100%;
 }
 
 .phones {
   position: relative;
   z-index: 1;
   margin: 0 auto;
-  height: 202px;
-  width: min(328px, 100%);
+  height: 210px;
   overflow: hidden;
 }
 
@@ -333,24 +278,40 @@ img {
   justify-content: center;
   align-items: flex-start;
   width: 157px;
-  height: 202px;
+  height: 210px;
 }
 
 .phones--1 .phone {
   margin-top: 0;
 }
 
+.phones--2 {
+  --pair-gap: 6px;
+  --pair-inset: 8px;
+  --pair-phone: calc((100cqi - var(--pair-inset) * 2 - var(--pair-gap)) / 2);
+  container-type: inline-size;
+  width: 100%;
+  max-width: 328px;
+  height: 210px;
+}
+
+.phones--2 .phone {
+  width: var(--pair-phone);
+  height: calc(var(--pair-phone) * 312 / 144);
+}
+
 .phones--2 .phone:first-child {
   position: absolute;
-  left: 7px;
+  left: var(--pair-inset);
   top: 8px;
   z-index: 2;
 }
 
 .phones--2 .phone:last-child {
   position: absolute;
-  left: 177px;
-  top: 44px;
+  left: calc(var(--pair-inset) + var(--pair-phone) + var(--pair-gap));
+  right: auto;
+  top: 40px;
   z-index: 1;
 }
 
@@ -425,8 +386,6 @@ img {
 .foot-qr img {
   width: 101px;
   height: 101px;
-  background: #fff;
-  padding: 6px;
   flex-shrink: 0;
 }
 
@@ -461,42 +420,6 @@ img {
 
 /* Desktop / wide screens only. Tablet uses the mobile layout. */
 @media (min-width: 1200px) {
-  .head {
-    padding: 0 40px;
-  }
-
-  .copy-link {
-    right: 28px;
-  }
-
-  .head-title {
-    font-size: 24px;
-  }
-
-  .hex--tl {
-    top: -156px;
-    left: -94px;
-    width: 479px;
-  }
-
-  .hex--tr {
-    top: 1073px;
-    right: -20px;
-    width: 120px;
-  }
-
-  .hex--br {
-    top: 1250px;
-    right: -192px;
-    width: 411px;
-  }
-
-  .hex--bl {
-    bottom: -40px;
-    left: -48px;
-    width: 278px;
-  }
-
   .wrap {
     padding: 7.25rem 0 0;
   }
@@ -556,13 +479,37 @@ img {
   }
 
   .stage-glow {
-    width: 710px;
-    height: 452px;
-    left: var(--glow-l);
+    left: calc(var(--crop-l) + var(--crop-w) / 2);
     bottom: 0;
     top: auto;
     z-index: 0;
-    transform: none;
+    width: 920px;
+    height: 560px;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      ellipse 48% 52% at 50% 82%,
+      rgba(13, 99, 186, 0.3) 0%,
+      rgba(13, 99, 186, 0.14) 34%,
+      rgba(13, 99, 186, 0) 68%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 14%,
+        #000 86%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 14%,
+        #000 86%,
+        transparent 100%
+      ),
+      linear-gradient(to bottom, transparent 0%, #000 18%, #000 100%);
+    mask-composite: intersect;
   }
 
   .callouts {
@@ -570,43 +517,63 @@ img {
     z-index: 1;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 36px;
-    width: max-content;
+    width: auto;
   }
 
   .callouts--l {
     top: var(--call-l-t);
-    left: var(--call-l-x);
+    left: calc(var(--call-l-x) + 300px - 4px);
+    transform: translateX(-100%);
+    align-items: flex-end;
+  }
+
+  .callouts--l .callout {
+    align-self: flex-end;
+    text-align: right;
   }
 
   .callouts--r {
     top: var(--call-r-t);
     left: var(--call-r-x);
+    align-items: flex-start;
   }
 
   .callouts--r-bottom-only {
     top: var(--call-r-b-t);
   }
 
-  .callout--right-top {
-    width: 280px;
-    margin-left: var(--call-r-indent);
-    padding: 24px 20px 24px 30px;
-  }
-
-  .callout--right-bottom {
-    text-align: right;
-  }
-
   .callout {
-    width: 300px;
+    display: inline-block;
+    flex: 0 0 auto;
+    align-self: flex-start;
+    width: auto;
+    max-width: 300px;
+    height: auto;
     background: #fff;
     border-radius: 10px;
-    padding: 24px 30px;
+    padding: 16px 20px;
     box-shadow: 0 4px 2px rgba(0, 0, 0, 0.15);
     font-size: 18px;
     font-weight: 500;
-    line-height: normal;
+    line-height: 1.3;
+  }
+
+  .callout p {
+    display: inline;
+  }
+
+  .callout--right-top {
+    max-width: 280px;
+    margin-left: var(--call-r-indent);
+    padding: 16px 16px 16px 20px;
+  }
+
+  .callout--right-bottom {
+    text-align: left;
+    margin-left: calc(var(--call-r-b-shift, 0px) + 4px);
+    padding-left: 20px;
   }
 
   .phones-col {
@@ -622,6 +589,7 @@ img {
     z-index: 1;
     width: var(--crop-w);
     height: var(--crop-h);
+    max-width: none;
   }
 
   .phone {
@@ -629,6 +597,11 @@ img {
     height: var(--phone-h);
     border-width: var(--phone-border);
     border-radius: var(--phone-radius);
+  }
+
+  .phones--2 .phone {
+    width: var(--phone-w);
+    height: var(--phone-h);
   }
 
   /* Two screenshots */
@@ -639,13 +612,13 @@ img {
     --crop-l: 291px;
     --crop-w: 458px;
     --crop-h: 281px;
-    --glow-l: 165px;
     --call-l-t: 63px;
     --call-l-x: 16px;
     --call-r-t: 51px;
     --call-r-b-t: 179px;
     --call-r-x: 696px;
     --call-r-indent: 65px;
+    --call-r-b-shift: 28px;
     --phone-w: 200px;
     --phone-h: 436px;
     --phone-border: 10px;
@@ -659,6 +632,7 @@ img {
 
   .stage--2 .phones--2 .phone:last-child {
     left: 248px;
+    right: auto;
     top: 61px;
   }
 
@@ -670,13 +644,13 @@ img {
     --crop-l: 264px;
     --crop-w: 213px;
     --crop-h: 293px;
-    --glow-l: 16px;
     --call-l-t: 75px;
     --call-l-x: -16px;
     --call-r-t: 63px;
     --call-r-b-t: 191px;
     --call-r-x: 427px;
     --call-r-indent: 85px;
+    --call-r-b-shift: 30px;
     --phone-w: 195px;
     --phone-h: 424px;
     --phone-border: 9px;

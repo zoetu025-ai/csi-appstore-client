@@ -26,7 +26,8 @@
 這些都寫在 `clients.xlsx` 該公司的工作表裡，匯出後變成那家的 `client.json`。不要手改 JSON。
 
 **這家整頁只填一次**
-- 客戶名稱（左上角會顯示成 `{名稱} Application`）
+- 客戶名稱（左上角顯示 B1 填的文字；沒寫就不加）
+- 頁尾 QR 圖（B2 填圖片網址或檔名；沒填不顯示）
 
 **每一款 APP 各準備這些**（在同一份檔裡多寫幾段）
 - 名稱
@@ -43,12 +44,13 @@
 
 1. 打開專案根目錄的 `clients.xlsx`（沒有就先 `pip3 install -r scripts/requirements.txt`，再 `python3 scripts/clients_xlsx.py init`）
 2. 複製 `_template`，把工作表改名成短名（例如 `taipei-pd`）
-3. B1 填客戶全名；從第 5 列起一列一款 APP
+3. B1 填客戶全名、B2 填頁尾 QR 圖；從第 5 列起一列一款 APP
 4. 圖檔放到 `clients/短名/`，Excel 裡只寫檔名
 5. `python3 scripts/clients_xlsx.py export` → 寫出各家 `client.json`
-6. 要在目前預覽頁看某家：`python3 scripts/clients_xlsx.py preview 短名`
+6. 要同時看多家：`http://127.0.0.1:8765/?client=短名`（每個短名一個分頁）
+   單看一家也可：`python3 scripts/clients_xlsx.py preview 短名`
 
-`_readme`、`_template` 不會匯出。範例 sheet：`example-pd`（雙機+單機）、`example-sparse`（只填左字卡、沒有 APK／說明書）。
+`_readme`、`_template` 不會匯出。目前三家：`smart-industry-center`、`harbor-county-sheriff`、`critical-technology`。
 
 怎麼放（一家客戶一個資料夾）：
 
@@ -72,6 +74,7 @@ clients/taipei-pd/
 ```json
 {
   "clientName": "Taipei City Police Department",
+  "qrCode": "img/QRcode.png",
   "apps": [
     {
       "name": "Mobile MDT",
@@ -111,7 +114,8 @@ clients/taipei-pd/
 
 | 欄位 | 誰填 | 頁面上怎麼用 |
 |------|------|----------------|
-| `clientName` | 整頁一次 | 左上角 `{clientName} Application` |
+| `clientName` | 整頁一次 | 左上角標題，Excel 寫什麼就顯示什麼 |
+| `qrCode` | 整頁一次 | 頁尾 QR 圖；沒填不顯示 |
 | `name` | 每款 APP | 標題 |
 | `version` | 每款 APP | 截圖下方，與系統需求寫在同一行 |
 | `requirement` | 每款 APP | `V2.4.1 \| require Android 4.3 / iOS 11.0 or above` |
@@ -128,6 +132,7 @@ Excel 欄名對應（第 4 列，不要改英文）：
 | Excel | JSON |
 |-------|------|
 | B1 `clientName` | `clientName` |
+| B2 `qrCode` | `qrCode` |
 | `feature_left` / `feature_right_top` / `feature_right_bottom` | `features.left` / `rightTop` / `rightBottom` |
 | `screenshot_1` + 可選的 `screenshot_2` | `screenshots` 陣列 |
 | `google_play` / `user_guide` | `googlePlay` / `userGuide` |
@@ -149,6 +154,7 @@ Excel 欄名對應（第 4 列，不要改英文）：
 | 欄位 | 數量 | 必填 |
 |------|------|------|
 | `clientName` | 1 | 是 |
+| `qrCode` | 0～1 | 否；沒填則頁尾不顯示 QR |
 
 ### APP 列表
 
@@ -184,6 +190,16 @@ Excel 欄名對應（第 4 列，不要改英文）：
 | `rightBottom` | 右下 | 不用 | 有填才列入 |
 
 可以只填右上、只填左+右下，或三張都填。不要再靠陣列順序猜是哪一張。
+
+寬螢幕字卡尺寸（已鎖定）：
+
+- 卡片跟著文字變大變小（Figma hug），不是固定 300×70
+- 字級固定 18px，不把字縮小去塞進框
+- 短句：卡片變窄；長句：最寬 300px 再換行，高度跟著長
+- **左卡：靠手機那一側（右邊）固定，往左變寬**
+- **右卡：靠手機那一側（左邊）固定，往右變寬**
+- 內距 16×20；右上卡最寬 280px（含既有縮排）
+- 右下卡與左卡到手機的距離相同（靠手機那一側）；內距與左卡一樣 20px
 
 ---
 
@@ -226,11 +242,11 @@ Excel 欄名對應（第 4 列，不要改英文）：
 
 ## 上線前看一眼
 
-- 客戶名稱對了（左上角是 `{名稱} Application`）
+- 客戶名稱對了（左上角跟 Excel B1 一樣）
 - 每款 APP 的字卡是自己的；沒填的卡沒有出現
 - 截圖是純畫面、有套進手機框，沒破圖
 - 每款 APP 截圖張數對（1 張單機、2 張雙機）
 - 有的按鈕點得進去、沒有的按鈕不要出現
 - 右上角圖示會複製這個頁面網址
 - 電腦（寬螢幕）與手機／平板都打開過
-- QR 掃進去是這家客戶的頁
+- QR 有填才出現；掃進去是這家客戶的頁

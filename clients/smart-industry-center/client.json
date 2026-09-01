@@ -1,5 +1,5 @@
 {
-  "clientName": "Test",
+  "clientName": "Smart Industry Center",
   "apps": [
     {
       "name": "Mobile MDT",
@@ -10,10 +10,10 @@
         "rightTop": "From Floor Plans to RMS: Total Real-Time Command.",
         "rightBottom": "Zero Delay. Total Clarity."
       },
-      "icon": "img/apps/icon-InfoMDT.png",
+      "icon": "clients/smart-industry-center/mdt-logo.png",
       "screenshots": [
-        "img/ui/screenshot-template.png",
-        "img/ui/screenshot-template.png"
+        "clients/smart-industry-center/mdt-screenshot-1.png",
+        "clients/smart-industry-center/mdt-screenshot-2.png"
       ],
       "ios": "https://apps.apple.com/example",
       "googlePlay": "https://play.google.com/example",
@@ -26,12 +26,11 @@
       "requirement": "Android 4.3 / iOS 11.0 or above",
       "features": {
         "left": "Manage cases everywhere you want.",
-        "rightTop": "Arrive Informed. Respond Faster. Save Lives.",
-        "rightBottom": "Zero Delay. Total Clarity."
+        "rightBottom": "Enforcing biometric privacy standards."
       },
       "icon": "img/apps/icon-ActiveResponse.png",
       "screenshots": [
-        "img/ui/screenshot-template.png"
+        "clients/smart-industry-center/Intelligence-screenshot.jpg"
       ],
       "googlePlay": "https://play.google.com/example",
       "userGuide": "#"
@@ -41,11 +40,10 @@
       "version": "v2.4.1",
       "requirement": "iOS 14.0+ / Android 9.0+",
       "features": {
-        "left": "Smart Task Categories",
-        "rightTop": "Daily To-Do List",
-        "rightBottom": "Project Progress Board"
+        "left": "Regulating artificial intelligence safety.",
+        "rightTop": "Daily To-Do List"
       },
-      "icon": "img/apps/icon-InfoMDT.png",
+      "icon": "https://play-lh.googleusercontent.com/xXxzy8ouHlJzAefoQO0Naaa81HcSfsGR9i-Qu0F-XPEx7UGWB92-pNjHs8wfRna1pEPXKxBbB03rb-dDQ_obKMM=w480-h960-rw",
       "screenshots": [
         "img/ui/screenshot-template.png"
       ],
@@ -57,11 +55,11 @@
       "version": "v1.8.0",
       "requirement": "macOS 12.0+ / Windows 11",
       "features": {
-        "left": "Multi-Account Asset Overview",
-        "rightTop": "Daily Expense Chart",
+        "left": "Shielding public power grids.",
+        "rightTop": "Safeguarding municipal IoT networks.",
         "rightBottom": "Monthly Overbudget Alert"
       },
-      "icon": "img/apps/icon-ActiveResponse.png",
+      "icon": "img/apps/icon-InfoMDT.png",
       "screenshots": [
         "img/ui/screenshot-template.png",
         "img/ui/screenshot-template.png"
@@ -69,15 +67,13 @@
       "ios": "https://apps.apple.com/app/id987654321"
     },
     {
-      "name": "TaskWise",
+      "name": "AegisGrid",
       "version": "v2.4.1",
       "requirement": "iOS 14.0+ / Android 9.0+",
       "features": {
-        "left": "Smart Task Categories",
-        "rightTop": "Daily To-Do List",
-        "rightBottom": "Project Progress Board"
+        "left": "Smart Task Categories"
       },
-      "icon": "img/apps/icon-InfoMDT.png",
+      "icon": "https://play-lh.googleusercontent.com/AzMDIMd8f8BXuvuuLODiUhBAYA5nX52-g0VszvPCjROYYiF_njsehcEReqLMJJ9Ukn8LLvqWag94QDHZYSx3GQ=w480-h960-rw",
       "screenshots": [
         "img/ui/screenshot-template.png"
       ],
@@ -85,15 +81,14 @@
       "android": "https://example.com/downloads/taskwise-v2.4.1.apk"
     },
     {
-      "name": "FinTrack Pro",
+      "name": "CyberShield Premier",
       "version": "v1.8.0",
       "requirement": "macOS 12.0+ / Windows 11",
       "features": {
-        "left": "Multi-Account Asset Overview",
-        "rightTop": "Daily Expense Chart",
-        "rightBottom": "Monthly Overbudget Alert"
+        "left": "Standardizing next-gen telecommunications.",
+        "rightTop": "Daily Expense Chart"
       },
-      "icon": "img/apps/icon-ActiveResponse.png",
+      "icon": "img/apps/icon-InfoMDT.png",
       "screenshots": [
         "img/ui/screenshot-template.png",
         "img/ui/screenshot-template.png"
@@ -101,12 +96,11 @@
       "ios": "https://apps.apple.com/app/id987654321"
     },
     {
-      "name": "TaskWise",
+      "name": "Sentinel Vault",
       "version": "v2.4.1",
       "requirement": "iOS 14.0+ / Android 9.0+",
       "features": {
-        "left": "Smart Task Categories",
-        "rightTop": "Daily To-Do List",
+        "left": "nspecting semiconductor security protocols.",
         "rightBottom": "Project Progress Board"
       },
       "icon": "img/apps/icon-InfoMDT.png",
@@ -115,54 +109,7 @@
       ],
       "ios": "https://apps.apple.com/app/id123456789",
       "android": "https://example.com/downloads/taskwise-v2.4.1.apk"
-    },
-    {
-      "name": "FinTrack Pro",
-      "version": "v1.8.0",
-      "requirement": "macOS 12.0+ / Windows 11",
-      "features": {
-        "left": "Multi-Account Asset Overview",
-        "rightTop": "Daily Expense Chart",
-        "rightBottom": "Monthly Overbudget Alert"
-      },
-      "icon": "img/apps/icon-ActiveResponse.png",
-      "screenshots": [
-        "img/ui/screenshot-template.png",
-        "img/ui/screenshot-template.png"
-      ],
-      "ios": "https://apps.apple.com/app/id987654321"
-    },
-    {
-      "name": "TaskWise",
-      "version": "v2.4.1",
-      "requirement": "iOS 14.0+ / Android 9.0+",
-      "features": {
-        "left": "Smart Task Categories",
-        "rightTop": "Daily To-Do List",
-        "rightBottom": "Project Progress Board"
-      },
-      "icon": "img/apps/icon-InfoMDT.png",
-      "screenshots": [
-        "img/ui/screenshot-template.png"
-      ],
-      "ios": "https://apps.apple.com/app/id123456789",
-      "android": "https://example.com/downloads/taskwise-v2.4.1.apk"
-    },
-    {
-      "name": "FinTrack Pro",
-      "version": "v1.8.0",
-      "requirement": "macOS 12.0+ / Windows 11",
-      "features": {
-        "left": "Multi-Account Asset Overview",
-        "rightTop": "Daily Expense Chart",
-        "rightBottom": "Monthly Overbudget Alert"
-      },
-      "icon": "img/apps/icon-ActiveResponse.png",
-      "screenshots": [
-        "img/ui/screenshot-template.png",
-        "img/ui/screenshot-template.png"
-      ],
-      "ios": "https://apps.apple.com/app/id987654321"
     }
-  ]
+  ],
+  "qrCode": "clients/smart-industry-center/qrcode-smart-industry-center.png"
 }

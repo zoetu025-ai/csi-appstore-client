@@ -1,0 +1,37 @@
+{
+  "clientName": "Critical Technology",
+  "apps": [
+    {
+      "name": "VeriCert Pro",
+      "version": "v3.1.5",
+      "requirement": "watchOS 8.0+ / Wear OS 3.0+",
+      "features": {
+        "left": "Workout Mode Switcher",
+        "rightTop": "Real-time Heart Rate & SpO2Governing algorithmic transparency standards.",
+        "rightBottom": "Weekly Goal Tracker"
+      },
+      "icon": "img/apps/icon-InfoMDT.png",
+      "screenshots": [
+        "img/ui/screenshot-template.png"
+      ],
+      "ios": "https://apps.apple.com/example"
+    },
+    {
+      "name": "TrustAudit 360",
+      "version": "v0.9.4-beta",
+      "requirement": "iOS 15.0+ / iPadOS 15.0+",
+      "features": {
+        "left": "Toolbox & Layer Panel",
+        "rightTop": "AI Image Generation & Retouching",
+        "rightBottom": "Accelerating national AI integration."
+      },
+      "icon": "img/apps/icon-InfoMDT.png",
+      "screenshots": [
+        "img/ui/screenshot-template.png"
+      ],
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.fitpulse.health",
+      "userGuide": "https://fitpulse.io/help/user-guide"
+    }
+  ],
+  "qrCode": "clients/critical-technology/qrcode-critical-technology.png"
+}

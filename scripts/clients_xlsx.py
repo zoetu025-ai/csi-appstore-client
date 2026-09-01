@@ -33,6 +33,7 @@ SLUG_RE = re.compile(r"^[a-z][a-z0-9-]{0,30}$")
 SKIP_PREFIX = "_"
 
 META_LABEL = "clientName"
+QR_LABEL = "qrCode"
 HEADER_ROW = 4
 DATA_START_ROW = 5
 
@@ -131,10 +132,12 @@ def apply_column_widths(ws: Worksheet) -> None:
         ws.column_dimensions[get_column_letter(i)].width = width
 
 
-def write_sheet(ws: Worksheet, client_name: str, rows: list[dict], example: bool) -> None:
+def write_sheet(
+    ws: Worksheet, client_name: str, rows: list[dict], example: bool, qr_code: str = ""
+) -> None:
     ws["A1"] = META_LABEL
     ws["B1"] = client_name
-    ws["C1"] = "整頁只填一次 → 左上角 {名稱} Application"
+    ws["C1"] = "整頁只填一次 → 左上角顯示這格文字"
     ws["A1"].font = FONT_META
     ws["B1"].font = Font(name="Calibri", bold=True, size=14, color=GRAY)
     ws["C1"].font = FONT_HINT
@@ -142,10 +145,18 @@ def write_sheet(ws: Worksheet, client_name: str, rows: list[dict], example: bool
     ws["B1"].fill = FILL_META
     ws.merge_cells("B1:E1")
 
-    ws["A2"] = "sheet 名稱 = 網址短名。一列一款 APP。截圖 2 留空＝單機，有填＝雙機。"
-    ws.merge_cells("A2:M2")
-    ws["A2"].font = FONT_HINT
-    ws["A2"].fill = FILL_HINT
+    ws["A2"] = QR_LABEL
+    ws["B2"] = qr_code
+    ws["C2"] = "← 填這格左邊（B2）"
+    ws["A2"].font = FONT_META
+    ws["B2"].font = FONT_BODY
+    ws["C2"].font = FONT_HINT
+    ws["A2"].fill = FILL_META
+    ws["B2"].fill = FILL_META
+    ws["B2"].comment = Comment(
+        "頁尾 QR 圖片：填網址或檔名。沒填就不顯示。",
+        "CSI",
+    )
 
     for i, (_, zh, _) in enumerate(COLUMNS, start=1):
         cell = ws.cell(3, i, zh)
@@ -180,6 +191,7 @@ def write_sheet(ws: Worksheet, client_name: str, rows: list[dict], example: bool
             ws.cell(r, c, row.get(key, ""))
 
     ws.row_dimensions[1].height = 24
+    ws.row_dimensions[2].height = 22
     ws.row_dimensions[3].height = 20
     ws.freeze_panes = "A5"
     ws.auto_filter.ref = f"A{HEADER_ROW}:M{HEADER_ROW}"
@@ -198,7 +210,7 @@ def write_readme(ws: Worksheet) -> None:
         "步驟",
         "1. 複製 _template（或複製最像的 example sheet）",
         "2. 把新工作表改名成短名（不可用 _ 開頭，那些不會匯出）",
-        "3. B1 填客戶全名",
+        "3. B1 填客戶全名；B2 填頁尾 QR 圖片（網址或檔名，沒填不顯示）",
         "4. 從第 5 列起，一列一款 APP",
         "5. 圖檔不要貼進儲存格：檔案放到 clients/短名/ ，這裡只寫檔名",
         "6. 存檔後執行：python3 scripts/clients_xlsx.py export",
@@ -295,11 +307,21 @@ def build_workbook() -> Workbook:
     write_sheet(template, "", [], example=False)
 
     pd = wb.create_sheet(EXAMPLE_PD["slug"])
-    write_sheet(pd, EXAMPLE_PD["clientName"], EXAMPLE_PD["rows"], example=True)
+    write_sheet(
+        pd,
+        EXAMPLE_PD["clientName"],
+        EXAMPLE_PD["rows"],
+        example=True,
+        qr_code="img/QRcode.png",
+    )
 
     sparse = wb.create_sheet(EXAMPLE_SPARSE["slug"])
     write_sheet(
-        sparse, EXAMPLE_SPARSE["clientName"], EXAMPLE_SPARSE["rows"], example=True
+        sparse,
+        EXAMPLE_SPARSE["clientName"],
+        EXAMPLE_SPARSE["rows"],
+        example=True,
+        qr_code="img/QRcode.png",
     )
     return wb
 
@@ -324,10 +346,10 @@ def find_header_row(ws: Worksheet) -> int | None:
     return None
 
 
-def read_client_name(ws: Worksheet, header_row: int) -> str:
+def read_meta(ws: Worksheet, header_row: int, label: str) -> str:
     for r in range(1, header_row):
-        if cell_str(ws.cell(r, 1).value) == META_LABEL:
-            return cell_str(ws.cell(r, 2).value)
+        if cell_str(ws.cell(r, 1).value) == label:
+            return cell_href(ws.cell(r, 2))
     return ""
 
 
@@ -395,7 +417,7 @@ def parse_sheet(ws: Worksheet) -> tuple[dict, list[str]]:
         if key not in cols:
             warnings.append(f"{ws.title}: 缺少欄 {key}")
 
-    client_name = read_client_name(ws, header_row)
+    client_name = read_meta(ws, header_row, META_LABEL)
     if not client_name:
         warnings.append(f"{ws.title}: 未填 clientName（B1）")
 
@@ -433,6 +455,9 @@ def parse_sheet(ws: Worksheet) -> tuple[dict, list[str]]:
         raise ValueError(f"{ws.title} 沒有任何 APP 列")
 
     payload = {"clientName": client_name, "apps": apps}
+    qr_code = read_meta(ws, header_row, QR_LABEL)
+    if qr_code:
+        payload["qrCode"] = qr_code
     return payload, warnings
 
 
@@ -450,6 +475,11 @@ def resolve_file(slug: str, value: str) -> Path | None:
 
 def check_files(slug: str, payload: dict) -> list[str]:
     missing = []
+    qr = payload.get("qrCode", "")
+    if qr:
+        path = resolve_file(slug, qr)
+        if path is not None and not path.exists():
+            missing.append(f"{slug}: 找不到 QR 圖 {qr}")
     for app in payload["apps"]:
         values = [app.get("icon", ""), app.get("userGuide", "")]
         values.extend(app.get("screenshots") or [])

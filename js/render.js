@@ -9,10 +9,43 @@
   };
 
   var root = document.getElementById("app");
-  var data = window.CLIENT;
-
   if (!root) return;
 
+  var hugCallouts = function () {
+    var nodes = root.querySelectorAll(".callout");
+    var i;
+    var j;
+    var el;
+    var p;
+    var range;
+    var rects;
+    var line;
+    var cs;
+    var pad;
+    for (i = 0; i < nodes.length; i++) {
+      el = nodes[i];
+      p = el.querySelector("p");
+      if (!p) continue;
+      el.style.width = "";
+      range = document.createRange();
+      range.selectNodeContents(p);
+      rects = range.getClientRects();
+      line = 0;
+      for (j = 0; j < rects.length; j++) {
+        if (rects[j].width > line) line = rects[j].width;
+      }
+      if (line < 1) continue;
+      cs = window.getComputedStyle(el);
+      pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+      el.style.width = Math.ceil(line + pad + 1) + "px";
+    }
+  };
+
+  if (window.matchMedia) {
+    window.matchMedia("(min-width: 1200px)").addEventListener("change", hugCallouts);
+  }
+
+  var paint = function (data) {
   if (!data) {
     root.innerHTML = '<p class="alert">No data found.</p>';
     return;
@@ -35,18 +68,6 @@
       '" alt="' +
       esc(alt) +
       '" width="130" height="42">' +
-      "</a>"
-    );
-  };
-
-  var apkBtn = function (href) {
-    if (!href) return "";
-    return (
-      '<a class="dl dl--apk" href="' +
-      esc(href) +
-      '">' +
-      '<img src="img/img_andriod.png" alt="" width="24" height="14">' +
-      "<span><small>Download</small><strong>Android</strong></span>" +
       "</a>"
     );
   };
@@ -121,7 +142,7 @@
       : "";
 
     var glowHtml = shotCount
-      ? '<img class="stage-glow" src="img/ui/glow.png" alt="">'
+      ? '<div class="stage-glow" aria-hidden="true"></div>'
       : "";
     var phonesHtml = shotCount
       ? '<div class="phones-col">' +
@@ -164,7 +185,7 @@
     var dls =
       storeBtn(a.ios, "img/btn_ios.png", "Download on the App Store") +
       storeBtn(a.googlePlay, "img/btn_google.png", "Google Play") +
-      apkBtn(a.android);
+      storeBtn(a.android, "img/btn_android.png", "Download Android");
 
     var guide = a.userGuide
       ? '<a class="guide" href="' +
@@ -208,16 +229,19 @@
     );
   };
 
-  var clientTitle = esc(data.clientName || "Client Name") + " Application";
+    var clientTitle = esc(data.clientName || "Client Name");
+    document.title = data.clientName || "Client Name";
+    var qrHtml = data.qrCode
+      ? '<div class="foot-qr">' +
+        '<img src="' +
+        esc(data.qrCode) +
+        '" alt="QR code">' +
+        "<p>Please use a mobile phone to download the App</p>" +
+        "</div>"
+      : "";
 
-  root.innerHTML =
-    '<div class="bg-hex" aria-hidden="true">' +
-      '<img class="hex hex--tl" src="img/ui/hex-tl.svg" alt="">' +
-      '<img class="hex hex--tr" src="img/ui/hex-tr.svg" alt="">' +
-      '<img class="hex hex--br" src="img/ui/hex-br.svg" alt="">' +
-      '<img class="hex hex--bl" src="img/ui/hex-bl.svg" alt="">' +
-    "</div>" +
-    '<header class="head">' +
+    root.innerHTML =
+      '<header class="head">' +
       "<p class=\"head-title\">" +
       clientTitle +
       "</p>" +
@@ -231,10 +255,7 @@
     apps.map(appHtml).join("") +
     "</main>" +
     '<footer class="foot">' +
-      '<div class="foot-qr">' +
-        '<img src="img/QRcode.png" alt="QR code">' +
-        "<p>Please use a mobile phone to download the App</p>" +
-      "</div>" +
+      qrHtml +
       "<small>&copy; CSI Technology Group. All Rights Reserved.</small>" +
     "</footer>" +
     '<div class="toast" hidden>Copied</div>';
@@ -262,4 +283,39 @@
       }
     });
   }
+
+    var runHug = function () {
+      hugCallouts();
+    };
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(runHug);
+    } else {
+      runHug();
+    }
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(runHug);
+    }
+  };
+
+  var slug = "";
+  try {
+    slug = new URLSearchParams(window.location.search).get("client") || "";
+  } catch (e) {
+    slug = "";
+  }
+  if (slug && /^[a-z][a-z0-9-]{0,30}$/.test(slug)) {
+    fetch("clients/" + encodeURIComponent(slug) + "/client.json")
+      .then(function (res) {
+        if (!res.ok) throw new Error(String(res.status));
+        return res.json();
+      })
+      .then(paint)
+      .catch(function () {
+        root.innerHTML =
+          '<p class="alert">Cannot load client “' + esc(slug) + "”.</p>";
+      });
+    return;
+  }
+
+  paint(window.CLIENT);
 })();

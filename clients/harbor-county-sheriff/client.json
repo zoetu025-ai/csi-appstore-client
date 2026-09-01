@@ -1,6 +1,19 @@
 {
-  "clientName": "zoe",
+  "clientName": "Harbor County Sheriff",
   "apps": [
+    {
+      "name": "Field Notes",
+      "version": "V1.0.0",
+      "requirement": "iOS 14.0 or above",
+      "features": {
+        "left": "Capture the scene before you leave it."
+      },
+      "icon": "img/apps/icon-InfoMDT.png",
+      "screenshots": [
+        "img/ui/screenshot-template.png"
+      ],
+      "ios": "https://apps.apple.com/example"
+    },
     {
       "name": "FitPulse",
       "version": "v3.1.5",
@@ -14,7 +27,8 @@
       "screenshots": [
         "img/ui/screenshot-template.png"
       ],
-      "ios": "https://apps.apple.com/example"
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.fitpulse.health",
+      "userGuide": "https://fitpulse.io/help/user-guide"
     },
     {
       "name": "PixelCraft",
@@ -29,8 +43,7 @@
       "screenshots": [
         "img/ui/screenshot-template.png"
       ],
-      "googlePlay": "https://play.google.com/store/apps/details?id=com.fitpulse.health",
-      "userGuide": "https://fitpulse.io/help/user-guide"
+      "android": "https://example.com/downloads/pixelcraft-beta.apk"
     },
     {
       "name": "EchoChat",
@@ -45,7 +58,9 @@
       "screenshots": [
         "img/ui/screenshot-template.png"
       ],
-      "android": "https://example.com/downloads/pixelcraft-beta.apk"
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.echochat.messenger",
+      "android": "https://example.com/downloads/echochat-v4.0.2.apk"
     }
-  ]
+  ],
+  "qrCode": "clients/harbor-county-sheriff/qrcode-harbor-county-sheriff.png"
 }
