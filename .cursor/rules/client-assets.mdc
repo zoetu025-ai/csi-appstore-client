@@ -1,0 +1,41 @@
+---
+description: 客戶檔名規範，以及 Excel 更新後如何改名、搬資料夾
+alwaysApply: true
+---
+
+# 客戶資產命名與 Excel 同步
+
+對話裡的檔名可能是錯的。**這張表才是對的。** 使用者說 Excel 更新／匯出／同步時，跑 `python3 scripts/clients_xlsx.py sync`，不要手搬。
+
+## 檔名（Excel 只填檔名）
+
+| 用途 | 正確檔名 | 位置 |
+|------|----------|------|
+| 整頁 QR | `qrcode.{ext}` | `clients/{短名}/` |
+| APP 圖示 | `icon.{ext}` | `clients/{短名}/{資料夾}/` |
+| 截圖 1 | `screenshot-1.{ext}` | 同上 |
+| 截圖 2 | `screenshot-2.{ext}` | 同上（有才放） |
+| 說明書檔 | `guide.{ext}` | 同上 |
+
+- **短名** = 工作表名（小寫、連字號），也是 `?client=` 參數，不要改已給出去的短名
+- **資料夾名** = 由 Excel `name`（APP 名稱）自動轉成 slug（小寫、連字號，例如 `Active Response` → `active-response`）
+- **APP 名稱** 只用在頁面顯示，不要手動建含空格的資料夾
+
+```
+clients/hillsdale/
+  client.json
+  qrcode.png
+  active-response/icon.png
+  active-response/screenshot-1.jpg
+  active-response/screenshot-2.jpg
+  active-response/guide.pdf
+```
+
+## sync 必須保證
+
+- 先對到「這家客戶、這一款 APP」再搬；禁止跨客戶、禁止搬進錯的產品資料夾
+- 遠端／`img/`／空白／`#`／其他 `clients/{別家}/` 路徑不動
+- `#` 當沒填：不要寫進 JSON、頁面不要當按鈕
+- 只改名＋搬到上表位置，並把 Excel 改成正確檔名，再 export
+- 不刪還有檔的資料夾；空的舊產品資料夾可刪
+- 缺檔只報告，不造假檔、不覆蓋不同內容的目標檔

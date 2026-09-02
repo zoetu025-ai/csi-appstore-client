@@ -1,0 +1,38 @@
+---
+description: 使用者說要打包／上線時，一律用同一支 pack 指令
+alwaysApply: true
+---
+
+# 上線打包
+
+使用者說「打包、上線包、deploy zip、要傳去主機」時，只准這一種做法：
+
+```bash
+python3 scripts/clients_xlsx.py pack
+```
+
+產出 `dist/csi-appstore.zip`。不要另寫 zip 指令、不要用手選檔。
+
+## zip 內結構（相對路徑不可改）
+
+```
+index.html
+css/
+js/
+img/
+clients/{短名}/client.json
+clients/{短名}/qrcode.{ext}
+clients/{短名}/{由 APP 名稱產生的資料夾}/…
+```
+
+客戶名單以 **Excel 工作表** 為準（`_` 開頭不進包）。
+
+## 不准進包
+
+`_proto/`、`scripts/`、`clients.xlsx`、`SOP.md`、`docs/`、`.git`、`.cursor`、`.vscode`、`.DS_Store`
+
+## 打包前
+
+1. 跑 pack（它會先 `export --check`）
+2. 缺圖／缺 JSON 要先講，不要 silently 略過真的要上線的客戶
+3. 回報 zip 路徑與包進去的客戶短名

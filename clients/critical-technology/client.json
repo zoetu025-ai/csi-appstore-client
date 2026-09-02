@@ -1,5 +1,5 @@
 {
-  "clientName": "Critical Technology",
+  "clientName": "",
   "apps": [
     {
       "name": "VeriCert Pro",
@@ -33,5 +33,5 @@
       "userGuide": "https://fitpulse.io/help/user-guide"
     }
   ],
-  "qrCode": "clients/critical-technology/qrcode-critical-technology.png"
+  "qrCode": "clients/critical-technology/qrcode.png"
 }

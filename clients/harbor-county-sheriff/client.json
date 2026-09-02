@@ -1,5 +1,5 @@
 {
-  "clientName": "Harbor County Sheriff",
+  "clientName": "",
   "apps": [
     {
       "name": "Field Notes",
@@ -62,5 +62,5 @@
       "android": "https://example.com/downloads/echochat-v4.0.2.apk"
     }
   ],
-  "qrCode": "clients/harbor-county-sheriff/qrcode-harbor-county-sheriff.png"
+  "qrCode": "clients/harbor-county-sheriff/qrcode.png"
 }

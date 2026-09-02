@@ -1,5 +1,5 @@
 {
-  "clientName": "Smart Industry Center",
+  "clientName": "",
   "apps": [
     {
       "name": "Mobile MDT",
@@ -10,15 +10,14 @@
         "rightTop": "From Floor Plans to RMS: Total Real-Time Command.",
         "rightBottom": "Zero Delay. Total Clarity."
       },
-      "icon": "clients/smart-industry-center/mdt-logo.png",
+      "icon": "clients/smart-industry-center/mobile-mdt/icon.png",
       "screenshots": [
-        "clients/smart-industry-center/mdt-screenshot-1.png",
-        "clients/smart-industry-center/mdt-screenshot-2.png"
+        "clients/smart-industry-center/mobile-mdt/screenshot-1.png",
+        "clients/smart-industry-center/mobile-mdt/screenshot-2.png"
       ],
       "ios": "https://apps.apple.com/example",
       "googlePlay": "https://play.google.com/example",
-      "android": "https://example.com/mdt.apk",
-      "userGuide": "#"
+      "android": "https://example.com/mdt.apk"
     },
     {
       "name": "Active Response",
@@ -30,10 +29,9 @@
       },
       "icon": "img/apps/icon-ActiveResponse.png",
       "screenshots": [
-        "clients/smart-industry-center/Intelligence-screenshot.jpg"
+        "clients/smart-industry-center/active-response/screenshot-1.jpg"
       ],
-      "googlePlay": "https://play.google.com/example",
-      "userGuide": "#"
+      "googlePlay": "https://play.google.com/example"
     },
     {
       "name": "TaskWise",
@@ -111,5 +109,5 @@
       "android": "https://example.com/downloads/taskwise-v2.4.1.apk"
     }
   ],
-  "qrCode": "clients/smart-industry-center/qrcode-smart-industry-center.png"
+  "qrCode": "clients/smart-industry-center/qrcode.png"
 }

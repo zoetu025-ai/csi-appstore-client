@@ -1,0 +1,58 @@
+{
+  "clientName": "",
+  "apps": [
+    {
+      "name": "Active Response",
+      "version": "V2.4.1",
+      "requirement": "Android 4.3 / iOS 11.0 or above",
+      "tagline": "Instant dispatch and response for volunteer firefighters.",
+      "features": {
+        "left": "Two-way status sync",
+        "rightTop": "Real-time incident updates",
+        "rightBottom": "Zero Delay. TotaCritical hazmat alertsl Clarity."
+      },
+      "icon": "clients/hillsdale/active-response/icon.png",
+      "screenshots": [
+        "clients/hillsdale/active-response/screenshot-1.jpg",
+        "clients/hillsdale/active-response/screenshot-2.jpg"
+      ],
+      "ios": "https://apps.apple.com/us/app/active-response/id1468450876?l=zh-Hant-TW",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.csitech.activeresponse.capemaycity",
+      "android": "clients/hillsdale/CSI TW_External Training Policy_v1.2.pdf",
+      "userGuide": "clients/hillsdale/active-response/guide.pdf"
+    },
+    {
+      "name": "Cape May OEM",
+      "version": "V1.8.0",
+      "requirement": "Android 4.3 / iOS 11.0 or above",
+      "features": {
+        "left": "Manage cases everywhere you want.",
+        "rightBottom": "Enforcing biometric privacy standards."
+      },
+      "icon": "clients/hillsdale/cape-may-oem/icon.png",
+      "screenshots": [
+        "clients/hillsdale/cape-may-oem/screenshot-1.png",
+        "clients/hillsdale/cape-may-oem/screenshot-2.png"
+      ],
+      "ios": "https://apps.apple.com/us/app/fire-inspection/id6740013987?l=zh-Hant-TW",
+      "userGuide": "clients/hillsdale/cape-may-oem/guide.pdf"
+    },
+    {
+      "name": "Personnel",
+      "version": "v2.4.1",
+      "requirement": "iOS 14.0+ / Android 9.0+",
+      "tagline": "Seamless shift and absence management on the go.",
+      "features": {
+        "left": "Submit shift and time-off requests",
+        "rightTop": "Daily To-Do ListView calendar events"
+      },
+      "icon": "clients/hillsdale/personnel/icon.png",
+      "screenshots": [
+        "clients/hillsdale/personnel/screenshot-1.png"
+      ],
+      "ios": "https://apps.apple.com/us/app/infopersonnel/id1501310970?l=zh-Hant-TW",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.csitech.android.personnel"
+    }
+  ],
+  "qrCode": "clients/smart-industry-center/qrcode.png"
+}
